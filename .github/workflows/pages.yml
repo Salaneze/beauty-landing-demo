@@ -1,0 +1,36 @@
+# Наружу только страница и сжатые jpg: исходники фото (img/src), DESIGN.md
+# и csp_hash.py остаются в репо, на сайт не попадают.
+name: pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["index.html", "img/*.jpg", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          mkdir -p _site/img
+          cp index.html _site/
+          cp img/*.jpg _site/img/
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v5

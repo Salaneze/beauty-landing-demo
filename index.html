@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- GitHub Pages своих заголовков не ставит, поэтому CSP здесь. Поправил любой из двух скриптов — python csp_hash.py,
+     иначе браузер молча не запустит скрипт. frame-ancestors в meta не работает, это только заголовком -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' 'sha256-4HF7FVzdkGDpiYJnTs0LE8g/GORZ12Moy9le77sNmFk='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'none'">
+<script>document.documentElement.classList.add('js')</script>
+<title>Ланская — косметолог, запись в Телеграме</title>
+<meta name="description" content="Косметолог Вера Ланская на Патриарших: диагностика кожи, чистки и пилинги без уколов, план ухода на три месяца. Запись в Телеграме или MAX.">
+<meta name="theme-color" content="#F6F0E8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%236E1F2E'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-style='italic' font-size='20' fill='%23F6F0E8' text-anchor='middle'%3E%D0%9B%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --milk: #F6F0E8;
+  --milk-2: #ECE3D8;
+  --ink: #2A1E1C;
+  --ink-2: #6B5751;
+  --wine: #6E1F2E;
+  --on-wine: #F3E6E1;
+  --line: rgb(42 30 28 / .14);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Onest", system-ui, sans-serif;
+  --gutter: clamp(16px, 4vw, 48px);
+  --wrap: 1280px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --expo: cubic-bezier(.16, 1, .3, 1);
+  --soft: cubic-bezier(.33, .6, .25, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; overflow-x: clip;
+  background: var(--milk); color: var(--ink);
+  font: 400 17px/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; }
+.wrap { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 26px; border-radius: 999px;
+  background: var(--wine); color: var(--on-wine); border: 1.5px solid var(--wine);
+  font: 500 15px/1 var(--sans); text-decoration: none; white-space: nowrap;
+  transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); }
+.btn:active { transform: scale(.97); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--milk); }
+
+/* ---------- шапка ---------- */
+.top {
+  position: fixed; inset: 0 0 auto; z-index: 10;
+  background: rgb(246 240 232 / .86); backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: transform .35s var(--ease), border-color .2s;
+}
+.top.scrolled { border-color: var(--line); }
+/* прячем только после первого экрана: на старте шапка должна быть видна, иначе непонятно куда жать */
+.top.away { transform: translateY(-100%); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.logo { font: italic 500 28px/1 var(--serif); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; gap: 10px; }
+.logo small { font: 500 12px/1 var(--sans); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.top nav { display: flex; gap: 32px; font-size: 15px; }
+.top nav a { text-decoration: none; padding-block: 12px; }
+.top nav a:hover { color: var(--wine); }
+.top .btn { min-height: 44px; padding: 0 20px; }
+
+/* ---------- герой ---------- */
+.hero { padding-top: 72px; }
+.hero .wrap {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 48px; align-items: center;
+  min-height: min(calc(100svh - 72px), 900px); padding-block: 48px 64px;
+}
+.kicker { margin: 0 0 24px; font: 500 13px/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+h1 {
+  margin: 0; font: 500 clamp(48px, 6.6vw, 96px)/1.02 var(--serif);
+  letter-spacing: -.02em;
+}
+h1 em { font-style: italic; color: var(--wine); }
+/* строка уезжает вниз за маску и выезжает один раз; запас снизу под хвосты «у», «д» */
+h1 .ln { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+h1 .ln > span { display: block; transition: transform 1.1s var(--expo) .2s; }
+h1 .ln:nth-child(2) > span { transition-delay: .3s; }
+h1 .ln:nth-child(3) > span { transition-delay: .4s; }
+
+/* Вход первого экрана. Прячем только под .js: если скрипт не запустился (CSP-хеш не пересчитали),
+   страница остаётся видимой, а не пустой */
+.js:not(.ready) h1 .ln > span { transform: translateY(105%); }
+.js:not(.ready) :is(.kicker, .lead, .cta, .offer, .note) { opacity: 0; }
+/* animation, а не transition: задержка входа иначе прилипла бы к hover плиты оффера;
+   backwards — после конца отдаёт transform обратно hover-у */
+.ready :is(.kicker, .lead, .cta, .offer, .note) { animation: rise .9s var(--expo) var(--dl, 0s) backwards; }
+.kicker { --dl: .1s; } .lead { --dl: .65s; } .cta { --dl: .8s; } .offer { --dl: .95s; } .note { --dl: 1.1s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+
+.lead { margin: 32px 0 0; max-width: 48ch; font-size: 18px; color: var(--ink-2); }
+.lead b { color: var(--ink); font-weight: 500; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+.offer {
+  margin-top: 40px; max-width: 520px;
+  display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 24px;
+  padding: 24px 28px; border-radius: 20px;
+  background: var(--wine); color: var(--on-wine);
+  text-decoration: none;
+  transition: transform .25s var(--ease);
+}
+.offer:hover { transform: translateY(-2px); }
+.offer .t { font: 500 15px/1.4 var(--sans); }
+.offer .t span { display: block; opacity: .72; font-size: 14px; }
+.offer .p { grid-row: span 2; font: 500 clamp(40px, 4.4vw, 56px)/1 var(--serif); white-space: nowrap; }
+/* кнопка голосом клиента (приём La Rosée): плита и так кликабельна, строка говорит, что будет по клику */
+.offer .go { grid-column: 1 / -1; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgb(243 230 225 / .2); font: 600 15px/1 var(--sans); }
+.note { margin: 12px 0 0; font-size: 13px; color: var(--ink-2); }
+
+/* ---------- стопка фото ---------- */
+.stack { position: relative; aspect-ratio: 4 / 4.6; }
+.ph {
+  position: absolute; margin: 0; overflow: hidden; border-radius: 24px;
+  background: var(--milk-2); will-change: transform;
+  /* transform у рамки занят параллаксом из скрипта, поэтому вход — через clip-path рамки и scale картинки */
+  clip-path: inset(0 round 24px);
+  transition: clip-path 1.5s var(--expo) var(--dl, 0s);
+}
+.ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.9s var(--expo) var(--dl, 0s); }
+.js:not(.ready) .ph { clip-path: inset(100% 0 0 0 round 24px); }
+.js:not(.ready) .ph img { transform: scale(1.3) translateY(8%); }
+.ph-hands { --dl: .3s; } .ph-amp { --dl: .5s; }
+.ph-skin { inset: 0 14% 8% 0; }
+.ph-hands { width: 38%; aspect-ratio: 3 / 4; right: 0; top: 10%; border: 6px solid var(--milk); }
+.ph-amp { width: 34%; aspect-ratio: 1; right: 6%; bottom: 0; border: 6px solid var(--milk); }
+
+/* метки диагностики: точка с кольцом + подпись, появляются по одной */
+.mark {
+  position: absolute; display: flex; align-items: center; gap: 10px;
+  font: 500 13px/1.25 var(--sans); color: var(--ink);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.js:not(.ready) .mark { opacity: 0; transform: translateY(6px); }
+.mark i {
+  flex: none; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--milk); box-shadow: 0 0 0 4px rgb(246 240 232 / .45), 0 0 0 1px var(--wine) inset;
+}
+.mark span { padding: 6px 10px; border-radius: 10px; background: rgb(246 240 232 / .92); }
+.mark span b { display: block; font-weight: 600; color: var(--wine); }
+/* точки стоят на коже кадра hero-skin и не заезжают подписью на руки справа; новое фото — пересчитать */
+.mark:nth-of-type(1) { left: 26%; top: 30%; transition-delay: 1.4s; }
+.mark:nth-of-type(2) { left: 30%; top: 57%; transition-delay: 1.75s; }
+.mark:nth-of-type(3) { left: 18%; top: 77%; transition-delay: 2.1s; }
+
+/* ---------- тройка ---------- */
+.triad { border-top: 1px solid var(--line); }
+.triad .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+.triad div { padding: 40px 32px 48px 0; }
+.triad div + div { padding-left: 32px; border-left: 1px solid var(--line); }
+.triad b { display: block; font: 500 44px/1 var(--serif); color: var(--wine); margin-bottom: 12px; }
+.triad p { margin: 0; color: var(--ink-2); max-width: 30ch; }
+
+/* ---------- общие секции ---------- */
+.sec { padding-block: 128px 0; }
+/* у тройки свой нижний отступ, с полными 128 между ней и процедурами зияла дыра */
+.triad + .sec { padding-top: 96px; }
+.sec h2 { margin: 0; font: 500 clamp(40px, 5vw, 72px)/1.05 var(--serif); letter-spacing: -.02em; }
+.sec h2 em { font-style: italic; color: var(--wine); }
+/* строки заголовков выезжают из-под маски один раз и остаются (приём TrueKind); слова режет скрипт,
+   без него заголовок просто стоит на месте. Поля у маски — чтобы не срезать курсив и хвосты «у», «р» */
+.sec h2 .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .08em .14em; margin: 0 -.08em -.14em; }
+.sec h2 .w > span { display: inline-block; transform: translateY(110%); transition: transform 1.3s cubic-bezier(.16, 1, .3, 1) var(--d, 0s); }
+.sec h2.in .w > span { transform: none; }
+/* фото внутри рамки едет медленнее страницы; запас по scale, чтобы при сдвиге не показался край */
+@media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
+  [data-par] { transform: scale(1.14); will-change: transform; }
+}
+.head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+.head .lead { margin: 0; }
+
+/* ---------- процедуры: строки слева, фото справа меняется по наведению (приём Royal Clinic) ---------- */
+.svc { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.svc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.svc-list button {
+  all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: grid; grid-template-columns: 1fr auto auto; gap: 8px 24px; align-items: baseline;
+  padding: 24px 4px; border-bottom: 1px solid var(--line);
+  transition: background .2s var(--ease), padding .25s var(--ease);
+}
+.svc-list button:hover, .svc-list button:focus-visible, .svc-list button.on { background: var(--milk-2); padding-inline: 16px; }
+.svc-list button:focus-visible { outline: 2px solid var(--wine); outline-offset: -2px; }
+.svc-list .n { font: 500 clamp(24px, 2.4vw, 32px)/1.15 var(--serif); }
+.svc-list .d { grid-column: 1; font-size: 15px; color: var(--ink-2); }
+.svc-list .p { grid-row: 1; grid-column: 2; font: 500 17px/1 var(--sans); white-space: nowrap; }
+.svc-list .more { grid-row: 1 / span 2; grid-column: 3; align-self: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--wine); font-size: 18px; }
+.svc-pic { position: sticky; top: 104px; margin: 0; border-radius: 24px; overflow: hidden; aspect-ratio: 3 / 4; background: var(--milk-2); }
+.svc-pic img { width: 100%; height: 100%; object-fit: cover; transition: opacity .3s var(--ease); }
+
+/* ---------- лист процедуры ---------- */
+.sheet {
+  width: min(920px, 100% - 32px); max-height: min(90svh, 760px); padding: 0; border: 0; border-radius: 24px;
+  background: var(--milk); color: var(--ink); overflow: auto;
+}
+.sheet[open] { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); animation: up .35s var(--ease); }
+.sheet .btn { white-space: normal; text-align: center; }
+.sheet::backdrop { background: rgb(42 30 28 / .55); backdrop-filter: blur(4px); }
+@keyframes up { from { opacity: 0; transform: translateY(16px); } }
+.sheet > img { width: 100%; height: 100%; object-fit: cover; min-height: 320px; }
+.sheet-body { padding: 40px; }
+.sheet h3 { margin: 0; font: 500 40px/1.1 var(--serif); }
+.sheet-meta { margin: 8px 0 20px; color: var(--wine); font-weight: 500; }
+.sheet dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; margin: 24px 0 32px; font-size: 15px; }
+.sheet dt { color: var(--ink-2); }
+.sheet dd { margin: 0; }
+.sheet .x { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--milk); font-size: 26px; line-height: 1; cursor: pointer; z-index: 1; }
+
+/* ---------- обо мне ---------- */
+.about .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 80px; align-items: center; }
+.about-pic { margin: 0; border-radius: 24px; overflow: hidden; }
+.about-media { position: relative; }
+.chip {
+  position: absolute; margin: 0; padding: 14px 18px; border-radius: 16px;
+  background: rgb(246 240 232 / .94); box-shadow: 0 18px 40px -18px rgb(60 20 30 / .35);
+  font: 500 14px/1.3 var(--sans); color: var(--ink-2); will-change: translate;
+}
+.chip b { display: block; font: 500 30px/1 var(--serif); color: var(--wine); margin-bottom: 4px; }
+/* за край фото на треть ширины плашки — так видно, что она лежит сверху, а не нарисована на кадре */
+.chip-a { left: -28px; top: 14%; }
+.chip-b { right: -24px; bottom: 12%; }
+.about .lead { margin-top: 24px; }
+.facts { list-style: none; margin: 32px 0 0; padding: 0; }
+.facts li { padding: 14px 0; border-top: 1px solid var(--line); color: var(--ink-2); }
+.facts b { display: inline-block; width: 64px; color: var(--wine); font-weight: 600; }
+
+/* ---------- до/после ---------- */
+.ba { position: relative; aspect-ratio: 16 / 9; border-radius: 24px; overflow: hidden; background: var(--milk-2); --x: 50%; }
+.ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.ba-before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--x)) 0 0); }
+.ba::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--x); width: 2px; margin-left: -1px; background: var(--milk); pointer-events: none; }
+.ba input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.ba-tag { position: absolute; top: 16px; padding: 6px 12px; border-radius: 999px; background: rgb(246 240 232 / .9); font-size: 13px; font-weight: 500; }
+.ba-tag.l { left: 16px; } .ba-tag.r { right: 16px; }
+
+/* ---------- отзывы ---------- */
+.rev { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.rev article { padding: 32px; border: 1px solid var(--line); border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+.rev p { margin: 0; font: 500 22px/1.35 var(--serif); }
+.rev footer { font-size: 14px; color: var(--ink-2); }
+.rev footer b { color: var(--ink); font-weight: 600; }
+
+/* Появление при скролле (приём TrueKind со второго экрана), один раз. Прайс строками не трогаем:
+   за ценой пришли, и строка, выезжающая с задержкой, только мешает её найти (решение «Бритвы», NN/g).
+   Класс .rv ставит скрипт — без него ничего не прячется */
+/* expo здесь читался рывком: 80% пути за первые 0,3 с. Ровная кривая + проявление из прозрачности,
+   шторка не со дна, а с трети — так фото «выплывает», а не выстреливает */
+.rv-pic { transition: clip-path 1.6s var(--soft), opacity 1.2s var(--soft), translate 1.6s var(--soft); }
+.rv-pic:not(.in) { clip-path: inset(35% 0 0 0 round 24px); opacity: 0; translate: 0 40px; }
+.rv-pic.in { clip-path: inset(0 round 24px); }
+.rv-up { transition: opacity .8s var(--expo) var(--dl, 0s), transform .8s var(--expo) var(--dl, 0s); }
+.rv-up:not(.in) { opacity: 0; transform: translateY(28px); }
+/* отзывы на компьютере въезжают справа паровозиком (TrueKind, лента товаров); в столбик на телефоне — снизу */
+@media (min-width: 961px) {
+  .rev .rv-up { transition-duration: 1.1s; transition-timing-function: var(--soft); }
+  .rev .rv-up:not(.in) { transform: translateX(90px); }
+}
+
+/* ---------- FAQ ---------- */
+.faq .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 64px; }
+/* вопросов пять, а заголовок один: без липкой колонки слева висела пустота высотой в экран */
+.faq-side { position: sticky; top: 104px; align-self: start; }
+.faq-side p { margin: 24px 0 0; color: var(--ink-2); max-width: 32ch; }
+.faq-side a { color: var(--wine); text-underline-offset: 3px; }
+.faq details { border-top: 1px solid var(--line); }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 22px 0; font-size: 18px; font-weight: 500; min-height: 44px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--wine); font-size: 24px; line-height: 1; transition: transform .25s var(--ease); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 22px; color: var(--ink-2); max-width: 60ch; }
+
+/* ---------- запись: единственная тёмная секция, винный фон — главный контрастный блок ---------- */
+.contact { margin-top: 128px; padding-block: 112px; background: var(--wine); color: var(--on-wine); }
+.contact .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.band { margin-top: 128px; height: min(88svh, 860px); overflow: hidden; background: var(--milk-2); }
+/* кушетка в нижней трети кадра: при наезде 22svh и ходе 13% блок записи закрывал её целиком и оставалась
+   пустая стена. Наезд и ход уменьшены; точку масштаба не сдвигать — запас снизу кончается и вылезает фон */
+.band img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+/* наезд: фото в окне едет медленнее страницы, поэтому блок записи будто въезжает на кадр сверху вниз */
+.band + .contact { position: relative; z-index: 1; margin-top: -14svh; border-radius: 40px 40px 0 0; }
+.contact h2 em { color: var(--on-wine); }
+.contact .lead { color: rgb(243 230 225 / .8); margin-top: 24px; }
+.btn-light { background: var(--on-wine); color: var(--wine); border-color: var(--on-wine); }
+.btn-light:hover { background: var(--milk); border-color: var(--milk); }
+.btn-ghost-light { background: transparent; color: var(--on-wine); border-color: var(--on-wine); }
+.btn-ghost-light:hover { background: var(--on-wine); color: var(--wine); }
+.addr { list-style: none; margin: 40px 0 0; padding: 0; font-size: 15px; }
+.addr li { padding: 10px 0; border-top: 1px solid rgb(243 230 225 / .2); }
+.form { display: grid; gap: 16px; padding: 32px; border-radius: 20px; background: rgb(0 0 0 / .14); }
+.form label { display: grid; gap: 8px; font-size: 14px; }
+.form input, .form textarea {
+  font: inherit; font-size: 16px; color: var(--ink); background: var(--milk);
+  border: 1px solid transparent; border-radius: 12px; padding: 12px 14px; min-height: 48px;
+}
+.form input:focus-visible, .form textarea:focus-visible { outline: 2px solid var(--on-wine); outline-offset: 2px; }
+.form [aria-invalid="true"] { border-color: #f0b4a8; }
+.form .hint { font-size: 13px; color: rgb(243 230 225 / .72); }
+.form-err { margin: 0; font-size: 14px; color: #f6d3cb; }
+.form-err:empty { display: none; }
+.form .hp { position: absolute; left: -9999px; }
+.form-ok { display: none; margin: 0; font-weight: 500; }
+.form.sent > :not(.form-ok) { display: none; }
+.form.sent .form-ok { display: block; }
+
+.foot { padding-block: 48px 56px; font-size: 13px; color: var(--ink-2); }
+.foot .sign { font: 500 28px/1.2 var(--serif); color: var(--ink); margin: 0 0 12px; }
+.foot .sign em { color: var(--wine); }
+
+/* нижняя кнопка на телефоне: выезжает после первого экрана и больше не прячется (правило с «Бритвы») */
+.dock { display: none; }
+
+@media (max-width: 960px) {
+  .top nav { display: none; }
+  .sec { padding-top: 88px; }
+  /* за край фото на телефоне нельзя: поля 16px, вылезет горизонтальный скролл */
+  .chip-a { left: 12px; } .chip-b { right: 12px; }
+  .chip { padding: 10px 14px; } .chip b { font-size: 24px; }
+  .head, .svc, .about .wrap, .faq .wrap, .contact .wrap { grid-template-columns: 1fr; gap: 32px; }
+  .head { margin-bottom: 32px; }
+  .faq-side { position: static; }
+  .svc-pic { display: none; }
+  .rev { grid-template-columns: 1fr; }
+  .ba { aspect-ratio: 4 / 5; }
+  .sheet[open] { grid-template-columns: minmax(0, 1fr); }
+  .sheet > img { min-height: 0; max-height: 38svh; }
+  .sheet-body { padding: 24px; }
+  .contact { margin-top: 88px; padding-block: 72px; }
+  .band { margin-top: 88px; height: 52svh; }
+  .band + .contact { margin-top: -8svh; border-radius: 28px 28px 0 0; }
+  .dock {
+    display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 9;
+    transform: translateY(140%); transition: transform .4s var(--ease);
+    box-shadow: 0 12px 32px -12px rgb(42 30 28 / .5);
+  }
+  .dock.in { transform: none; }
+  .foot { padding-bottom: 112px; }
+  .hero .wrap { grid-template-columns: 1fr; min-height: 0; gap: 40px; padding-block: 32px 48px; }
+  /* на телефоне фото встаёт между заголовком и текстом: первым экраном должны читаться оффер и кнопка */
+  .hero .wrap { gap: 0; }
+  .copy { display: contents; }
+  .kicker { order: 1; } h1 { order: 2; } .stack { order: 3; margin-top: 32px; aspect-ratio: 4 / 3.4; }
+  .lead { order: 4; } .cta { order: 5; } .offer { order: 6; } .note { order: 7; }
+  .ph-skin { inset: 0 22% 0 0; }
+  .ph-hands { width: 34%; top: 6%; }
+  .ph-amp { width: 30%; right: 4%; }
+  .triad .wrap { grid-template-columns: 1fr; }
+  .triad div, .triad div + div { padding: 28px 0; border-left: 0; }
+  .triad div + div { border-top: 1px solid var(--line); }
+}
+@media (max-width: 480px) {
+  .logo small { display: none; }
+  .cta .btn { flex: 1 1 140px; }
+  .offer { padding: 20px; grid-template-columns: 1fr; }
+  .offer .p { grid-row: auto; font-size: 44px; margin-top: 8px; }
+  .mark { font-size: 12px; }
+  .mark:nth-of-type(3) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  h1 .ln > span, .mark, .ph img { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .ph { transform: none !important; clip-path: none !important; }
+  :is(.kicker, .lead, .cta, .offer, .note) { opacity: 1 !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#">Ланская <small>косметолог</small></a>
+    <nav aria-label="Разделы">
+      <a href="#services">Процедуры</a>
+      <a href="#prices">Цены</a>
+      <a href="#about">Обо мне</a>
+      <a href="#reviews">Отзывы</a>
+    </nav>
+    <!-- TODO: ссылки мессенджеров — демо, у заказчика подставить свой username и ссылку MAX -->
+    <a class="btn" href="#zapis">Записаться</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="copy">
+        <p class="kicker">Косметолог Вера Ланская · Москва, Патриаршие</p>
+        <h1>
+          <span class="ln"><span>Кожа, которую</span></span>
+          <span class="ln"><span><em>не хочется</em></span></span>
+          <span class="ln"><span>прятать</span></span>
+        </h1>
+        <p class="lead">Смотрю кожу, подбираю уход под ваш тип и даю план на три месяца. <b>Запись — минута в Телеграме, без звонков.</b></p>
+        <div class="cta">
+          <a class="btn" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.6l-4.7-1.5c-1-.3-1-1 .2-1.5L20.6 3.4c.9-.3 1.6.2 1.3 1.2Z"/></svg>
+            Написать в Телеграм
+          </a>
+          <a class="btn btn-ghost" href="https://max.ru/" target="_blank" rel="noopener">Написать в MAX</a>
+        </div>
+        <a class="offer" href="#zapis">
+          <span class="t">Первый визит: консультация и диагностика<span>40 минут · план ухода с собой</span></span>
+          <span class="p">2 500 ₽</span>
+          <span class="go">Хочу на диагностику →</span>
+        </a>
+        <p class="note">Имеются противопоказания, нужна консультация специалиста.</p>
+      </div>
+
+      <div class="stack" aria-hidden="true">
+        <figure class="ph ph-skin" data-speed="-0.06">
+          <img src="img/hero-skin.jpg" alt="" width="1100" height="1366" fetchpriority="high">
+        </figure>
+        <figure class="ph ph-hands" data-speed="0.12">
+          <img src="img/hero-hands.jpg" alt="" width="700" height="938">
+        </figure>
+        <figure class="ph ph-amp" data-speed="0.22">
+          <img src="img/hero-ampoule.jpg" alt="" width="700" height="700">
+        </figure>
+        <!-- цифры условные: метки показывают, что увидят на диагностике, а не чей-то результат -->
+        <div class="mark"><i></i><span><b>Скулы</b>расширенные поры</span></div>
+        <div class="mark"><i></i><span><b>Увлажнённость</b>38 % — ниже нормы</span></div>
+        <div class="mark"><i></i><span><b>Овал лица</b>тонус в норме</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="triad" aria-label="Коротко">
+    <div class="wrap">
+      <div><b>9 лет</b><p>практики, из них шесть — в своём кабинете</p></div>
+      <div><b>40 минут</b><p>первый визит: смотрим кожу и собираем уход</p></div>
+      <div><b>Без уколов</b><p>уход, чистки и пилинги — то, что делаю руками и аппаратом</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="services">
+    <div class="wrap">
+      <div class="head">
+        <h2>Процедуры <em>и цены</em></h2>
+        <p class="lead">Цена — за всю процедуру, без доплат за «сыворотку получше». Нажмите на строку — расскажу, как проходит и сколько заживает.</p>
+      </div>
+      <div class="svc" id="prices">
+        <ul class="svc-list" id="svcList"></ul>
+        <figure class="svc-pic" aria-hidden="true"><img id="svcPic" data-par="1.4" data-par-box=".svc" src="img/svc-diag.jpg" alt="" width="700" height="938" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec about" id="about">
+    <div class="wrap">
+      <div class="about-media">
+        <figure class="about-pic"><img data-par="1.7"src="img/about-master.jpg" alt="Вера Ланская в своём кабинете у кушетки" width="900" height="900" loading="lazy"></figure>
+        <!-- плашки едут с разной скоростью поверх фото (приём TrueKind) — отсюда глубина -->
+        <p class="chip chip-a" data-float="-1" aria-hidden="true"><b>9 лет</b>практики</p>
+        <p class="chip chip-b" data-float="1.6" aria-hidden="true"><b>1 клиент</b>в час, без потока</p>
+      </div>
+      <div>
+        <p class="kicker">Обо мне</p>
+        <h2>Вера <em>Ланская</em></h2>
+        <p class="lead">Косметолог-эстетист, девять лет практики. Работаю одна, в своём кабинете на Патриарших: один клиент в час, одноразовые расходники, кушетку перестилаю при вас.</p>
+        <ul class="facts">
+          <li><b>2017</b> диплом косметика-эстетиста, колледж индустрии красоты</li>
+          <li><b>2021</b> аппаратная косметология, курс 120 часов</li>
+          <li><b>2024</b> химические пилинги, повышение квалификации</li>
+        </ul>
+        <p class="note">Не врач: инъекции и лечение кожных заболеваний не делаю — если увижу, что нужен дерматолог, скажу прямо.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="results">
+    <div class="wrap">
+      <div class="head">
+        <h2>До и <em>после</em></h2>
+        <p class="lead">Потяните ползунок. Под каждым фото — что делали и за сколько визитов.</p>
+      </div>
+      <div class="ba" id="ba">
+        <img src="img/ba-after.jpg" alt="После курса: кожа ровнее, без воспалений" width="1400" height="781" loading="lazy">
+        <div class="ba-before"><img src="img/ba-before.jpg" alt="До курса: покраснение и воспаления на щеке" width="1400" height="781" loading="lazy"></div>
+        <span class="ba-tag l">До</span><span class="ba-tag r">После</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Сравнить до и после">
+      </div>
+      <!-- TODO: у заказчика — снимки клиентов с согласием; демо-пара постановочная, без подписи «демо» выдавать её за результат нельзя -->
+      <p class="note">Комбинированная чистка + 3 пилинга, 6 недель. Демо-фото: на сайте мастера будут снимки клиентов с их согласия.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="reviews">
+    <div class="wrap">
+      <div class="head">
+        <h2>Отзывы</h2>
+        <p class="lead">Демо-отзывы: на сайте заказчика — реальные, со ссылкой на Яндекс Карты.</p>
+      </div>
+      <div class="rev">
+        <article><p>«Первый косметолог, который не пытался продать мне двенадцать банок. Ушла с планом на листке и тремя средствами».</p><footer><b>Алина</b> · диагностика · сентябрь</footer></article>
+        <article><p>«После чистки краснота держалась до вечера, как и предупредили. Утром кожа ровная, поры заметно меньше».</p><footer><b>Марина</b> · комбинированная чистка · октябрь</footer></article>
+        <article><p>«Пилинги помогли, но эффект пришёл только к третьему визиту — не ждите чуда с первого раза. Записалась на курс заново».</p><footer><b>Ольга</b> · курс пилингов · август</footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec faq" id="faq">
+    <div class="wrap">
+      <div class="faq-side">
+        <h2>Частые <em>вопросы</em></h2>
+        <p>Своего вопроса не нашли — <a href="#zapis">напишите</a>, отвечу в течение часа.</p>
+      </div>
+      <div>
+        <details><summary>Можно прийти, если сейчас воспаления?</summary><p>Да, но чистку в этот день не делаю. Посмотрю кожу, соберу уход на две недели и запишу на процедуру, когда воспаление уйдёт.</p></details>
+        <details><summary>Сколько держится результат чистки?</summary><p>Обычно 4-6 недель. Дольше — если дома держать уход из плана, его выдаю с собой.</p></details>
+        <details><summary>Пилинг летом — можно?</summary><p>Поверхностный — да, с кремом SPF 50 каждый день. Срединные пилинги делаю с октября по март.</p></details>
+        <details><summary>Как отменить или перенести запись?</summary><p>Напишите в Телеграм или MAX за сутки — перенесу без вопросов. Позже — предоплата не возвращается.</p></details>
+        <details><summary>Как оплатить?</summary><p>Картой или СБП после процедуры. Предоплата 500 ₽ — только для визитов в субботу.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- финал как у TrueKind: широкое фото-окно, блок записи наезжает на него снизу -->
+  <div class="band" aria-hidden="true"><img data-par="1.4" src="img/band-cabinet.jpg" alt="" width="1920" height="1072" loading="lazy"></div>
+
+  <section class="sec contact dark" id="zapis">
+    <div class="wrap">
+      <div>
+        <h2>Запишитесь <em>за минуту</em></h2>
+        <p class="lead">Напишите, что беспокоит, — отвечу в течение часа с 9 до 21 и предложу время. Звонить не нужно, но можно.</p>
+        <div class="cta">
+          <a class="btn btn-light" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener">Написать в Телеграм</a>
+          <a class="btn btn-ghost-light" href="https://max.ru/" target="_blank" rel="noopener">Написать в MAX</a>
+        </div>
+        <ul class="addr">
+          <li>Москва, Малый Козихинский пер., 8 · 3 мин от м. Маяковская</li>
+          <li>Вт-Сб 10:00-20:00</li>
+          <li><a href="tel:+70000000000">+7 000 000-00-00</a> — если удобнее голосом</li>
+        </ul>
+      </div>
+      <form class="form" id="leadForm" novalidate>
+        <label>Как вас зовут<input name="name" autocomplete="given-name" required maxlength="60"></label>
+        <label>Что беспокоит? Напишите своими словами<textarea name="msg" rows="3" maxlength="600" placeholder="Например: после лета пигмент на скулах"></textarea></label>
+        <label>Телеграм или телефон для ответа<input name="contact" autocomplete="tel" required maxlength="80" aria-describedby="contactHint">
+          <small class="hint" id="contactHint">Звонить не буду — отвечу сообщением туда, куда укажете.</small></label>
+        <p class="form-err" id="formErr" role="alert"></p>
+        <!-- ловушка для ботов: людям поле не видно -->
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-light" type="submit">Хочу записаться</button>
+        <p class="form-ok" role="status">Спасибо! Напишу вам в течение часа.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="sign">Увидимся в кабинете. <em>Вера</em></p>
+    <p>Имеются противопоказания, нужна консультация специалиста. Демо-сайт: мастер и отзывы вымышлены.</p>
+  </div>
+</footer>
+
+<a class="dock btn" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener" id="dock">Записаться в Телеграме</a>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+  <form method="dialog"><button class="x" aria-label="Закрыть">×</button></form>
+  <img id="sheetImg" src="" alt="" width="700" height="938">
+  <div class="sheet-body">
+    <h3 id="sheetTitle"></h3>
+    <p class="sheet-meta" id="sheetMeta"></p>
+    <p id="sheetText"></p>
+    <dl id="sheetFacts"></dl>
+    <a class="btn" href="#zapis" id="sheetGo"></a>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  // строки и метки стартуют после шрифта: иначе заголовок выезжает Georgia и прыгает в Cormorant
+  // без rAF: в фоновой вкладке кадры не идут, и заголовок так и остался бы за маской
+  // и после фото героя: иначе шторка поднимается над пустой молочной рамкой
+  const go = () => root.classList.add('ready');
+  const heroImgs = [...document.querySelectorAll('.stack img')].map(i => i.decode().catch(() => {}));
+  Promise.all([document.fonts ? document.fonts.ready : 0, ...heroImgs]).then(go);
+  setTimeout(go, 1500);
+
+  const top = document.getElementById('top');
+  const dock = document.getElementById('dock');
+  let lastY = scrollY;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const layers = [...document.querySelectorAll('[data-speed]')];
+  const hero = document.querySelector('.hero');
+  let heroVisible = true;
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }).observe(hero);
+
+  // на телефоне не двигаем: палец и так тянет страницу, а лишний сдвиг читается как лаг
+  const desk = !reduce && matchMedia('(min-width: 961px)').matches;
+  const pars = desk ? [...document.querySelectorAll('[data-par]')] : [];
+  // плашки двигаем через translate, а не transform: transform занят их появлением (.rv-up)
+  // крупные заголовки плывут вполсилы плашек: 14px за проход, мелкий текст не трогаем — едущую строку тяжело читать
+  if (desk) document.querySelectorAll('h1, .sec h2').forEach(h => { h.dataset.float = '.5'; });
+  const floats = desk ? [...document.querySelectorAll('[data-float]')] : [];
+
+  let ticking = false;
+  function frame() {
+    ticking = false;
+    const y = scrollY;
+    for (const el of pars) {
+      // липкая рамка процедур стоит на месте, и ход по ней замирал рывком — такой картинке считаем от всего блока
+      const box = el.dataset.parBox ? el.closest(el.dataset.parBox) : el.parentElement;
+      const r = box.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) continue;
+      // +1 когда блок входит снизу, -1 когда уходит вверх
+      const p = (r.top + r.height / 2 - innerHeight / 2) / (innerHeight / 2 + r.height / 2);
+      // запас кадра под ход: при сдвиге на amp% с каждой стороны должно торчать не меньше amp%, иначе вылезет фон рамки
+      const amp = el.dataset.par * 6;
+      el.style.transform = `translate3d(0, ${(p * amp).toFixed(2)}%, 0) scale(${(1.02 + amp / 50).toFixed(3)})`;
+    }
+    for (const el of floats) {
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) continue;
+      const p = (r.top + r.height / 2 - innerHeight / 2) / (innerHeight / 2 + r.height / 2);
+      // 28px на единицу скорости: больше — плашки заметно «плывут» отдельно от фото и читаются как баг
+      el.style.translate = `0 ${(p * el.dataset.float * 28).toFixed(1)}px`;
+    }
+    top.classList.toggle('scrolled', y > 8);
+    top.classList.toggle('away', y > innerHeight * .6 && y > lastY);
+    lastY = y;
+    // по высоте героя, а не по IntersectionObserver: тот на быстром скролле не успевал сработать
+    if (y > hero.offsetHeight - innerHeight * .3) dock.classList.add('in');
+    if (reduce || !heroVisible) return;
+    for (const el of layers) el.style.transform = `translate3d(0, ${(y * el.dataset.speed * -1).toFixed(1)}px, 0)`;
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+  frame();
+
+  if (!reduce && 'IntersectionObserver' in window) {
+    const wrapWords = node => {
+      for (const n of [...node.childNodes]) {
+        if (n.nodeType === 1) { wrapWords(n); continue; }
+        if (n.nodeType !== 3) continue;
+        const frag = document.createDocumentFragment();
+        for (const part of n.textContent.split(/(\s+)/)) {
+          if (!part) continue;
+          // пробелы остаются текстом между масками, иначе строки перестают переноситься
+          if (/^\s+$/.test(part)) { frag.append(part); continue; }
+          const w = document.createElement('span'), s = document.createElement('span');
+          w.className = 'w'; s.textContent = part; w.append(s); frag.append(w);
+        }
+        n.replaceWith(frag);
+      }
+    };
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const h = e.target;
+        io.unobserve(h);
+        // строку определяем по offsetTop в момент показа: ширина уже финальная, перенос настоящий
+        const tops = [];
+        for (const w of h.querySelectorAll('.w')) {
+          let k = tops.indexOf(w.offsetTop);
+          if (k < 0) k = tops.push(w.offsetTop) - 1;
+          w.firstChild.style.setProperty('--d', k * .15 + 's');
+        }
+        h.classList.add('in');
+      }
+    }, { rootMargin: '0px 0px -12% 0px' });
+    document.querySelectorAll('.sec h2').forEach(h => { wrapWords(h); io.observe(h); });
+
+    const rv = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        rv.unobserve(e.target);
+        // фото lazy: на быстром скролле шторка поднималась над пустой рамкой, а потом кадр выстреливал
+        const img = e.target.querySelector('img');
+        (img ? img.decode().catch(() => {}) : Promise.resolve()).then(() => e.target.classList.add('in'));
+      }
+    }, { rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.svc-pic, .about-pic, .ba').forEach(el => { el.classList.add('rv-pic'); rv.observe(el); });
+    document.querySelectorAll('.rev article').forEach((el, i) => {
+      el.classList.add('rv-up'); el.style.setProperty('--dl', i * .15 + 's'); rv.observe(el);
+    });
+    // плашки — после фото: оно раскрывается 1,6 с, плашки догоняют к концу
+    document.querySelectorAll('.chip').forEach((el, i) => {
+      el.classList.add('rv-up'); el.style.setProperty('--dl', .6 + i * .2 + 's'); rv.observe(el);
+    });
+  }
+
+  const SVC = [
+    { n: 'Диагностика и план ухода', p: '2 500 ₽', t: '40 минут', d: 'Лампа Вуда, тест увлажнённости, разбор вашей косметички', img: 'img/svc-diag.jpg',
+      text: 'Смотрю кожу под лампой и при дневном свете, меряю увлажнённость, разбираем, чем вы пользуетесь сейчас. Уходите с планом на три месяца на листке: что делать дома и какие процедуры имеют смысл.',
+      facts: [['Длительность', '40 минут'], ['Восстановление', 'не нужно'], ['Разово или курс', 'разово, повтор через 3 месяца']] },
+    { n: 'Комбинированная чистка', p: '4 500 ₽', t: '75 минут', d: 'Пять шагов: демакияж, распаривание, ультразвук, ручная чистка, маска', img: 'img/svc-clean.jpg',
+      text: 'Ультразвук снимает верхний слой, ручная чистка — то, что не ушло. В конце успокаивающая маска. Краснота держится до вечера: планируйте процедуру не перед важной встречей.',
+      facts: [['Длительность', '75 минут'], ['Восстановление', 'краснота до 6-8 часов'], ['Разово или курс', 'раз в 4-6 недель']] },
+    { n: 'Химический пилинг', p: '3 800 ₽', t: '45 минут', d: 'Миндальный, гликолевый или молочный — по типу кожи', img: 'img/svc-peel.jpg',
+      text: 'Кислоту подбираю после диагностики. Поверхностные пилинги — круглый год, срединные — с октября по март. Обязательный SPF 50 каждый день курса.',
+      facts: [['Длительность', '45 минут'], ['Восстановление', 'шелушение 2-4 дня'], ['Разово или курс', 'курс 4-6 процедур раз в 10 дней']] },
+    { n: 'Уход по типу кожи', p: '3 900 ₽', t: '60 минут', d: 'Сыворотка, массаж, альгинатная маска — под то, что увидим на диагностике', img: 'img/svc-care.jpg',
+      text: 'Процедура для сухой, обезвоженной или уставшей кожи. Без игл и аппаратов, после неё можно сразу на встречу.',
+      facts: [['Длительность', '60 минут'], ['Восстановление', 'не нужно'], ['Разово или курс', 'раз в 2-3 недели']] },
+    { n: 'Массаж лица', p: '3 000 ₽', t: '45 минут', d: 'Скульптурный или лимфодренажный, с маслом без отдушек', img: 'img/svc-massage.jpg',
+      text: 'Снимает отёки и зажим в жевательных мышцах. Эффект «отдохнувшего лица» сразу, стойкий — после курса.',
+      facts: [['Длительность', '45 минут'], ['Восстановление', 'не нужно'], ['Разово или курс', 'курс 8-10 раз в неделю']] },
+  ];
+  const list = document.getElementById('svcList');
+  const pic = document.getElementById('svcPic');
+  // без innerHTML: заказчик зальёт прайс из таблицы или админки, и «<» в названии станет разметкой
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+  SVC.forEach((s, i) => {
+    const b = el('button');
+    b.type = 'button'; b.dataset.i = i;
+    const more = el('span', 'more', '→');
+    more.setAttribute('aria-hidden', 'true');
+    b.append(el('span', 'n', s.n), el('span', 'p', s.p), more, el('span', 'd', `${s.t} · ${s.d}`));
+    const li = el('li'); li.append(b); list.append(li);
+  });
+  const show = (i) => {
+    if (pic.getAttribute('src') === SVC[i].img) return;
+    pic.style.opacity = 0;
+    setTimeout(() => { pic.src = SVC[i].img; pic.style.opacity = 1; }, 150);
+  };
+  const sheet = document.getElementById('sheet');
+  list.addEventListener('pointerover', (e) => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  list.addEventListener('focusin', (e) => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  list.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const s = SVC[+b.dataset.i];
+    document.getElementById('sheetImg').src = s.img;
+    document.getElementById('sheetTitle').textContent = s.n;
+    document.getElementById('sheetMeta').textContent = `${s.t} · ${s.p}`;
+    document.getElementById('sheetText').textContent = s.text;
+    document.getElementById('sheetFacts').replaceChildren(...s.facts.flatMap(([k, v]) => [el('dt', '', k), el('dd', '', v)]));
+    const go = document.getElementById('sheetGo');
+    go.textContent = `Хочу записаться — ${s.p}`;
+    sheet.showModal();
+  });
+  // клик по подложке закрывает лист: на телефоне крестик не всегда под пальцем
+  sheet.addEventListener('click', (e) => { if (e.target === sheet) sheet.close(); });
+  document.getElementById('sheetGo').addEventListener('click', () => sheet.close());
+
+  const ba = document.getElementById('ba');
+  ba.querySelector('input').addEventListener('input', (e) => ba.style.setProperty('--x', e.target.value + '%'));
+
+  const contact = document.getElementById('zapis');
+  // над формой записи нижняя кнопка лишняя и закрывает поле
+  new IntersectionObserver(([e]) => { dock.style.visibility = e.isIntersecting ? 'hidden' : ''; }).observe(contact);
+
+  const form = document.getElementById('leadForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // ошибка спокойным тоном и с причиной: красная рамка без слов не говорит, что не так
+    const why = {
+      name: 'Напишите, как к вам обращаться.',
+      contact: 'Оставьте Телеграм или телефон — иначе мне некуда ответить.',
+    };
+    const errs = [];
+    for (const el of [form.elements.name, form.elements.contact]) {
+      const bad = !el.value.trim();
+      el.setAttribute('aria-invalid', bad);
+      if (bad) { if (!errs.length) el.focus(); errs.push(why[el.name]); }
+    }
+    document.getElementById('formErr').textContent = errs.join(' ');
+    if (errs.length || form.elements.website.value) return;
+    // TODO: отправка на /api/lead бота (LEAD_ORIGINS) — пока демо показывает только ответ
+    form.classList.add('sent');
+  });
+})();
+</script>
+</body>
+</html>
