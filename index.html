@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- GitHub Pages своих заголовков не ставит, поэтому CSP здесь. Поправил любой из двух скриптов — python csp_hash.py,
      иначе браузер молча не запустит скрипт. frame-ancestors в meta не работает, это только заголовком -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' 'sha256-4HF7FVzdkGDpiYJnTs0LE8g/GORZ12Moy9le77sNmFk='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' 'sha256-WdtPdqE3+FyBIhEgYcM8pY5NWuptxQ/zim0qnzxmwOI='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://watch-demo-shop.onrender.com; form-action 'self'; base-uri 'none'">
 <script>document.documentElement.classList.add('js')</script>
-<title>Ланская — косметолог, запись в Телеграме</title>
-<meta name="description" content="Косметолог Вера Ланская на Патриарших: диагностика кожи, чистки и пилинги без уколов, план ухода на три месяца. Запись в Телеграме или MAX.">
+<title>Ланская — демо сайта косметолога</title>
+<meta name="description" content="Демо сайта косметолога Веры Ланской: услуги, цены и форма заявки на консультацию.">
 <meta name="theme-color" content="#F6F0E8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%236E1F2E'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-style='italic' font-size='20' fill='%23F6F0E8' text-anchor='middle'%3E%D0%9B%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -406,13 +406,10 @@ h1 .ln:nth-child(3) > span { transition-delay: .4s; }
           <span class="ln"><span><em>не хочется</em></span></span>
           <span class="ln"><span>прятать</span></span>
         </h1>
-        <p class="lead">Смотрю кожу, подбираю уход под ваш тип и даю план на три месяца. <b>Запись — минута в Телеграме, без звонков.</b></p>
+        <p class="lead">Смотрю кожу, подбираю уход под ваш тип и даю план на три месяца.</p>
         <div class="cta">
-          <a class="btn" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.6l-4.7-1.5c-1-.3-1-1 .2-1.5L20.6 3.4c.9-.3 1.6.2 1.3 1.2Z"/></svg>
-            Написать в Телеграм
-          </a>
-          <a class="btn btn-ghost" href="https://max.ru/" target="_blank" rel="noopener">Написать в MAX</a>
+          <a class="btn" href="#zapis">Оставить заявку</a>
+          <a class="btn btn-ghost" href="#services">Посмотреть процедуры</a>
         </div>
         <a class="offer" href="#zapis">
           <span class="t">Первый визит: консультация и диагностика<span>40 минут · план ухода с собой</span></span>
@@ -536,11 +533,11 @@ h1 .ln:nth-child(3) > span { transition-delay: .4s; }
   <section class="sec contact dark" id="zapis">
     <div class="wrap">
       <div>
-        <h2>Запишитесь <em>за минуту</em></h2>
-        <p class="lead">Напишите, что беспокоит, — отвечу в течение часа с 9 до 21 и предложу время. Звонить не нужно, но можно.</p>
+        <h2>Заявка на <em>консультацию</em></h2>
+        <p class="lead">Выберите услугу или укажите удобное время в форме.</p>
         <div class="cta">
-          <a class="btn btn-light" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener">Написать в Телеграм</a>
-          <a class="btn btn-ghost-light" href="https://max.ru/" target="_blank" rel="noopener">Написать в MAX</a>
+          <a class="btn btn-light" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener">Пример бота записи</a>
+          <a class="btn btn-ghost-light" href="https://max.ru/" target="_blank" rel="noopener">Открыть MAX</a>
         </div>
         <ul class="addr">
           <li>Москва, Малый Козихинский пер., 8 · 3 мин от м. Маяковская</li>
@@ -548,16 +545,19 @@ h1 .ln:nth-child(3) > span { transition-delay: .4s; }
           <li><a href="tel:+70000000000">+7 000 000-00-00</a> — если удобнее голосом</li>
         </ul>
       </div>
-      <form class="form" id="leadForm" novalidate>
+      <form class="form" id="leadForm" method="post" novalidate>
+        <p>Демо-форма: используйте вымышленные данные. Заявка сохранится у разработчика, запись к мастеру не создаётся.</p>
         <label>Как вас зовут<input name="name" autocomplete="given-name" required maxlength="60"></label>
-        <label>Что беспокоит? Напишите своими словами<textarea name="msg" rows="3" maxlength="600" placeholder="Например: после лета пигмент на скулах"></textarea></label>
+        <label>Услуга или удобное время (необязательно)<textarea name="msg" rows="3" maxlength="600" placeholder="Например: массаж лица, в субботу"></textarea></label>
         <label>Телеграм или телефон для ответа<input name="contact" autocomplete="tel" required maxlength="80" aria-describedby="contactHint">
-          <small class="hint" id="contactHint">Звонить не буду — отвечу сообщением туда, куда укажете.</small></label>
+          <small class="hint" id="contactHint">Российский номер телефона или имя в Telegram, например @username.</small></label>
+        <label><input type="checkbox" name="consent" required style="width:auto"> Согласен на обработку введённых данных для демонстрации формы.</label>
         <p class="form-err" id="formErr" role="alert"></p>
         <!-- ловушка для ботов: людям поле не видно -->
         <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn btn-light" type="submit">Хочу записаться</button>
-        <p class="form-ok" role="status">Спасибо! Напишу вам в течение часа.</p>
+        <noscript><p>Для отправки включите JavaScript.</p></noscript>
+        <button class="btn btn-light" type="submit" disabled>Отправить демо-заявку</button>
+        <p class="form-ok" role="status">Демонстрационная заявка сохранена. Запись к мастеру не создана.</p>
       </form>
     </div>
   </section>
@@ -570,7 +570,7 @@ h1 .ln:nth-child(3) > span { transition-delay: .4s; }
   </div>
 </footer>
 
-<a class="dock btn" href="https://t.me/britvaa_demo_bot" target="_blank" rel="noopener" id="dock">Записаться в Телеграме</a>
+<a class="dock btn" href="#zapis" id="dock">Оставить заявку</a>
 
 <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
   <form method="dialog"><button class="x" aria-label="Закрыть">×</button></form>
@@ -758,23 +758,47 @@ h1 .ln:nth-child(3) > span { transition-delay: .4s; }
   new IntersectionObserver(([e]) => { dock.style.visibility = e.isIntersecting ? 'hidden' : ''; }).observe(contact);
 
   const form = document.getElementById('leadForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // ошибка спокойным тоном и с причиной: красная рамка без слов не говорит, что не так
-    const why = {
-      name: 'Напишите, как к вам обращаться.',
-      contact: 'Оставьте Телеграм или телефон — иначе мне некуда ответить.',
-    };
-    const errs = [];
-    for (const el of [form.elements.name, form.elements.contact]) {
-      const bad = !el.value.trim();
-      el.setAttribute('aria-invalid', bad);
-      if (bad) { if (!errs.length) el.focus(); errs.push(why[el.name]); }
+  const submit = form.querySelector('button[type="submit"]');
+  submit.disabled = false;
+  let previousPayload = null;
+  let requestKey = null;
+  let submitting = false;
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (submitting) return;
+    const name = form.elements.name.value.trim();
+    const contact = form.elements.contact.value.trim();
+    const phone = contact.replace(/[\s()+-]/g, '');
+    const validContact = /^@[A-Za-z0-9_]{5,32}$/.test(contact) || /^[78][0-9]{10}$/.test(phone);
+    const error = document.getElementById('formErr');
+    if (!name || !validContact || !form.elements.consent.checked) {
+      error.textContent = 'Укажите имя, российский телефон или Telegram @username и согласие.';
+      return;
     }
-    document.getElementById('formErr').textContent = errs.join(' ');
-    if (errs.length || form.elements.website.value) return;
-    // TODO: отправка на /api/lead бота (LEAD_ORIGINS) — пока демо показывает только ответ
-    form.classList.add('sent');
+    error.textContent = '';
+    const payload = JSON.stringify({name, contact, msg: form.elements.msg.value.trim(), consent: true, website: form.elements.website.value});
+    if (payload !== previousPayload) {
+      previousPayload = payload;
+      requestKey = crypto.randomUUID();
+    }
+    submitting = true;
+    submit.disabled = true;
+    try {
+      const response = await fetch('https://watch-demo-shop.onrender.com/api/forms/lanskaya', {
+        method: 'POST', credentials: 'omit',
+        headers: {'Content-Type': 'application/json', 'Idempotency-Key': requestKey},
+        body: payload
+      });
+      if (response.status === 200 || response.status === 201) form.classList.add('sent');
+      else if (response.status === 409) error.textContent = 'Не удалось повторить заявку. Измените данные и отправьте снова.';
+      else if (response.status === 429) error.textContent = 'Слишком много попыток. Попробуйте позже.';
+      else error.textContent = 'Не удалось отправить заявку. Попробуйте позже.';
+    } catch {
+      error.textContent = 'Нет ответа от сервера. Попробуйте ещё раз.';
+    } finally {
+      submitting = false;
+      submit.disabled = false;
+    }
   });
 })();
 </script>
